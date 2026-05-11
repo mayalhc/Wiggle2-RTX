@@ -26,11 +26,11 @@ extra_css:
 nav:
   - Wiggle 2 RTX Guide: 
       - "Welcome to Wiggle 2 RTX": index.md
-      - "Installation & Setup": installation.md
-      - "Layered Physics System": layered_physics.md
-      - "Keyframe & Sim Baking": baking.md
-      - "Sim Mix & Safety Guard": sim_mix.md
-      - "GroomForge Integration": integration.md
+      # - "Installation & Setup": installation.md
+      # - "Layered Physics System": layered_physics.md
+      # - "Keyframe & Sim Baking": baking.md
+      # - "Sim Mix & Safety Guard": sim_mix.md
+      # - "GroomForge Integration": integration.md
   
   # GroomForge 위키로 바로가는 연결 고리 (상단 메뉴)
   - "Go to GroomForge Wiki": 'https://github.io'
