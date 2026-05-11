@@ -33,7 +33,7 @@ nav:
       # - "GroomForge Integration": integration.md
   
   # GroomForge 위키로 바로가는 연결 고리 (상단 메뉴)
-  - "Go to GroomForge Wiki": 'https://mayalhc.github.io/GroomForge-Wiki/'
+  - "Go to GroomForge Wiki": integration.md
 
 # 플러그인 설정
 plugins:
