@@ -1,6 +1,6 @@
 # 사이트 설정
 site_name: Wiggle 2 RTX
-site_url: https://github.io
+site_url: https://mayalhc.github.io/Wiggle2-RTX/
 site_author: chamiseul
 
 # 마크다운 확장 기능 (기능 강화)
@@ -33,7 +33,7 @@ nav:
       # - "GroomForge Integration": integration.md
   
   # GroomForge 위키로 바로가는 연결 고리 (상단 메뉴)
-  - "Go to GroomForge Wiki": 'https://github.io'
+  - "Go to GroomForge Wiki": 'https://mayalhc.github.io/GroomForge-Wiki/'
 
 # 플러그인 설정
 plugins:
