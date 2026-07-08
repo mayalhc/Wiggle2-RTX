@@ -15,6 +15,26 @@
 
 ---
 
+## 🆕 What's New in v2.2.6
+
+This update is focused entirely on **stability and reliability**. A full pass was made through every setting in the UI to make sure each slider and toggle actually does what its label says — several controls that looked correct in the panel but silently did nothing (or did the wrong thing) have been fixed. No workflow changes are required; your existing rigs and settings will simply behave more correctly after updating.
+
+*   **Fixed: Total Limit ignored at higher Quality.** This was the headline bug. Raising the **Quality** slider (Sim Mix Layers → Bake settings) used to let bones swing far past their **Total Limit** — e.g. a 10° limit could visibly bend 90°. The limit is now enforced correctly no matter how high Quality is set.
+*   **Fixed: Freeze/Mute toggles that did nothing.** The Object/Bone **Freeze** icon and the new **Tail/Head Mute** icons (see below) now actually pause physics instead of being cosmetic.
+*   **Fixed: Bounce had no effect.** The **Bounce** slider on collisions now genuinely reflects velocity off a collider instead of being ignored.
+*   **Fixed: Head-side Wind was silent.** Wind Objects assigned in **Head Settings** now actually push the head, matching Tail behavior.
+*   **Fixed: Loop Physics did nothing.** The **Loop Physics** toggle (Bake panel) is now a single, working control — enabling it makes physics continue seamlessly when your timeline loops back to the start during playback, instead of hard-resetting every loop.
+*   **Fixed: Bake settings were ignored.** **Preroll**, **Overwrite Current Action**, and **Current Action to NLA** in the Bake panel are now actually applied when you bake, instead of being decorative.
+*   **Fixed: Root/Tip Distribution sliders were static.** Dragging the Stiff/Damp **Root** and **Tip** values now updates the whole chain live, the same way the one-click Presets already did.
+*   **New: Self Collision.** Bones can now collide with each other on the same rig (capsule-to-capsule), so tails, hair bunches, and skirt panels stop passing through themselves. Opt-in, off by default.
+*   **New: Real Sphere / Box / Cylinder / Capsule colliders.** Collision shapes no longer need an actual mesh — pick a simple Empty or object, scale it, and it works as a solid collider directly.
+*   **New: Turbulence & Vortex wind fields.** In addition to plain Wind, you can now drive bones with Blender's Turbulence and Vortex force fields for more organic, swirling motion.
+*   **New: Disk Point Cache.** Long, expensive simulations can now be cached to disk frame-by-frame, so scrubbing the timeline instantly loads cached results instead of re-simulating from frame 1 every time.
+*   **Improved: Horizontal Lattice Stabilizer.** Fixed incorrect bone pairing (it was linking unrelated bones across different chains), added multi-armature support, and added a Stretch Tolerance setting so the stabilizer resists snapping.
+*   **Improved: Adaptive Safety Guard.** Now also reacts to fast spinning motion (Rotation Threshold), not just fast linear movement, catching more types of explosive jitter.
+
+---
+
 ## ✨ Why RTX Edition?
 Experience next-level features that go far beyond the standard Wiggle 2. The RTX Edition is built for professional stability and complex multi-layered setups.
 
@@ -36,7 +56,7 @@ Together, they form a "Zero-Waste" ecosystem—from initial strand creation to t
 
 ---
 
-## 📖 User Guide: Wiggle 2 Physics v2.1.9
+## 📖 User Guide: Wiggle 2 Physics v2.2.6
 
 ### Step 1: Initializing your Physics Stack
 To begin using Wiggle 2 RTX, you must first define your animation and simulation layers. The system will not calculate physics until these layers are initialized.
@@ -72,6 +92,8 @@ To begin using Wiggle 2 RTX, you must first define your animation and simulation
 
 *   Toggle: Switches between per-bone individual limits and global settings.
 *   Total Limit: Sets the maximum allowed rotation. Higher values allow larger motion; lower values (e.g., 30-60°) prevent mesh clipping.
+*   **v2.2.6 fix**: Total Limit now holds correctly at every **Quality** level. Previously, raising Quality could let the bone swing far past the number you set (e.g. 10° behaving like 90°) — that's fixed, so you can safely raise Quality for smoother motion without your limit breaking.
+*   **Individual Limits (X / Z)**: Instead of one cone-shaped Total Limit, this lets you set separate up-down (X) and left-right (Z) ranges — useful for things like eyelids or fins that should only move in one plane.
 
 <video width="100%" controls>
   <source src="assets/blender_oJBmdVyU4K.mp4" type="video/mp4">
@@ -94,26 +116,51 @@ This core feature handles keyframes (animation) and simulation (physics) as a si
 
 ---
 
-## 🛡️ Step 4: Wiggle Safety Guard (Adaptive Safety)
+## 🛡️ Step 4: Wiggle Safety Guard (Adaptive Safety, Self Collision & Lattice)
 
 ![Safety Guard UI](assets/image 2.png)
 
-A "safety net" that prevents uncontrolled behavior such as explosions or infinite jitter during simulation.
+This panel is a "safety net" that prevents uncontrolled behavior such as explosions or infinite jitter during simulation. It now bundles three separate tools:
+
+### 1) Adaptive Safety
 1. **Adaptive Safety**: Detects abnormal velocity / excessive energy buildup and applies real-time damping to stabilize.
 2. **Sensitivity (e.g., 5.00)**: Higher values react more aggressively to small vibrations.
-3. **Note**: This feature is currently closer to an experimental stage. If motion becomes too stiff, turn it off or lower Sensitivity.
+3. **Rotation Threshold (deg/s)**: New in this update. Works alongside Sensitivity, but watches for *spinning* speed instead of position. If a bone starts spinning faster than this value (degrees per second), the guard damps it down before it explodes. Lower the value if you still see fast "whipping" motion after enabling Adaptive Safety.
+4. **Note**: This feature is currently closer to an experimental stage. If motion becomes too stiff, turn it off or lower Sensitivity.
+
+### 2) Self Collision (New)
+*   **Self Collision (this object)**: Turn this on per-armature to let a rig's own wiggle bones push each other apart instead of passing through themselves. Great for thick tails, bundled hair strands, or overlapping skirt panels. Off by default because it costs extra performance — only enable it where you actually see clipping.
+*   **Margin**: Extra buffer distance added on top of each bone's own Radius setting (found in Tail Settings) before bones are pushed apart. Raise this slightly if bones still visibly touch.
+
+### 3) Horizontal Lattice Stabilizer
+*   **Horizontal Lattice Stabilizer**: Enable this to link same-depth bones across neighboring chains (for example, the 3rd bone of every strand in a skirt or hair bunch). This keeps a group of dangling chains moving together as a coherent shape instead of flailing independently.
+*   **Lattice Stiffness**: How strongly linked bones pull back toward each other. Higher = tighter, more uniform grouping.
+*   **Stretch Tolerance**: How much the lattice link can stretch before it starts correcting. Raise this if you see popping/snapping between linked bones; lower it for a tighter group.
+*   **Show Lattice Guide**: Draws the connecting lines in the viewport so you can see which bones are linked.
+*   **Active Bone is Lattice Collider**: Mark the currently selected bone as a solid obstacle that other lattice-linked bones should avoid, with an adjustable Radius.
+*   **Tip**: This stabilizer runs in real time in the viewport (independent of the frame-by-frame simulation clock), so it reacts immediately as you scrub or drag — it's meant purely as a visual/interactive stabilizer for grouped strands, not as part of the baked physics result.
 
 ---
 
-## ⚙️ Step 5: Tail Settings (RTX Optimization Core)
+## ⚙️ Step 5: Tail & Head Settings (RTX Optimization Core)
 
 ![Tail Settings UI](assets/image 3.png)
 
-The most frequently used core settings area, with many stability improvements in v2.1.9.
-1. **Physics parameters**: Improved Mass/Gravity issues and more accurate Stretch recovery behavior.
-2. **Wind**: More precise, coherent responses across multiple bones.
-3. **Collisions (notable improvements)**: Stronger sub-stepping to reduce pass-through and pinching. Smoother stabilization for jittering related to Radius / Friction / Sticky.
-4. **Chain**: Added energy decay logic to reduce “tip energy buildup” explosions.
+The most frequently used core settings area, with many stability improvements in v2.2.6.
+
+1. **Physics parameters**: Mass, Stiff, Stretch, Damp, and Gravity, same as before — improved recovery behavior so stretched bones snap back more predictably.
+2. **Freeze this bone side (Mute)**: New Mute icon next to "Tail Settings" and "Head Settings" in the panel header. Toggling it pauses physics for just that side of the bone (it snaps back to follow the animated rest pose) without disabling the whole bone or object — handy for troubleshooting a single misbehaving bone without losing your other settings.
+3. **Stiff / Damp Root-Tip Distribution**: Click the small curve icon next to Stiff or Damp to reveal **Root** and **Tip** sliders. This tapers the value along the whole chain below the selected bone (e.g. stiffer near the root, looser at the tip) instead of one flat value for every bone. Dragging Root/Tip now updates the whole chain live as you type.
+4. **Wind**: Assign any Blender Force Field object to the Wind slot. As of v2.2.6 this also works correctly on **Head Settings** (previously head-side wind was silently ignored). Three field types are supported:
+   *   **Wind**: A steady directional push.
+   *   **Turbulence**: Chaotic, randomized motion — good for flags, leaves, loose hair.
+   *   **Vortex**: Swirling motion around the field object — good for magical/energy effects or hair caught in a draft.
+5. **Collisions**: Choose a collision source next to "Collisions":
+   *   **Object**: Collide against a real mesh object.
+   *   **Collection**: Collide against every mesh in a Collection at once.
+   *   **Sphere / Box / Cylinder / Capsule** (New): Collide against a simple procedural shape instead of a mesh. Just pick any object (an Empty works great) and its own scale defines the size of the shape — no need to model actual collision geometry. Capsule is recommended for limbs, tails, and fingers.
+6. **Radius / Friction / Bounce / Sticky**: Fine-tune how the bone reacts on contact. **Bounce** now actually reflects the bone off the surface (previously it had no effect) — 0 means it just stops on contact, higher values make it spring off.
+7. **Chain**: Reduces "tip energy buildup" so the far end of long chains doesn't build up excess energy and explode outward.
 
 ---
 
@@ -143,10 +190,18 @@ Applies optimized baseline values for common scenarios: **Jelly / Hair / Heavy /
 
 ![Bake System UI](assets/image 7.png)
 
-*   **Loop Physics**: Smoothly connects physics state from last frame back to the first.
-*   **Preroll**: Stabilization frames before baking (typically 10~30 frames).
-*   **Bake (with Auto-Off)**: Automatically turns off realtime physics after the bake completes.
-*   **Overwrite Current / Current Action to...**: Choose how the baked result is stored.
+*   **Loop Physics**: Smoothly connects physics state from last frame back to the first, so a looping animation doesn't "snap" or reset at the seam. Fixed in v2.2.6 — this toggle previously had no effect; it now works as a single, reliable control. Turn it on before baking a looping cycle (walk cycles, idle animations, etc.).
+*   **Preroll**: Number of extra stabilization frames simulated *before* your bake range starts (typically 10~30 frames), so the physics has already "settled" by the time your actual animation begins instead of starting from a stiff, frozen pose. Now actually applied when you bake.
+*   **Overwrite Current Action**: When on, bakes directly into your current action instead of creating a new one. When off, a new action is created for you so your original stays untouched. Now actually applied.
+*   **Current Action to NLA**: When on, your existing action is pushed down to an NLA track before baking, keeping it safely archived instead of being overwritten. Now actually applied.
+*   **Bake (with Auto-Off)**: Automatically turns off realtime physics after the bake completes, so playback shows the baked keyframes instead of re-simulating on top of them.
+
+### Disk Point Cache (New)
+For long or heavy simulations, scrubbing the timeline normally forces Wiggle 2 to re-simulate every frame from the start each time you jump backward — which gets slow on long ranges. The new **Disk Point Cache** box lets you:
+*   **Bake to Disk Cache**: Simulates your full frame range once and saves every frame's physics result to disk.
+*   **Use Cache During Playback**: While enabled, scrubbing/playback loads the saved result instantly instead of re-simulating.
+*   **Clear Cache**: Deletes the saved cache — do this after changing any physics settings, since the cache does not auto-detect setting changes.
+*   **Directory**: Where cache files are stored (defaults to a folder next to your `.blend` file).
 
 ---
 
