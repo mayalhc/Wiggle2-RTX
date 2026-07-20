@@ -15,6 +15,17 @@
 
 ---
 
+## 🆕 What's New in v2.2.9
+
+The headline fix this release: a bug that could **permanently disable simulation in a saved file, with zero indication anywhere why** — if you've had a file that mysteriously "went dead," this is almost certainly it, and it now fixes itself the moment you reopen the file. Also fixes two separate cases of the Layer Weight slider appearing to do nothing, and a Blender 5.2-specific display glitch on Total Limit.
+
+*   **Fixed (critical): simulation could permanently stop working after a Hard Reset, even across saves and reloads.** The Hard Reset button briefly flags physics to pause while it resets every bone, then un-flags it when done — but if that reset hit any snag along the way (a bone that no longer existed, for example), it could stop partway through and leave physics flagged "paused" forever, with no checkbox or indicator anywhere showing this. Saving the file locked that broken state in permanently — every future reload would show a rig that just sits there doing nothing. Two fixes: Hard Reset can no longer get stuck this way, and **any file that was already affected now heals itself automatically the instant it's opened** — no manual fix needed.
+*   **Fixed: Layer Weight looking "stuck" once dragged down to 0%.** Dragging a layer's Weight slider all the way to 0 used to also mute its NLA track for efficiency — but Blender doesn't re-evaluate a muted track at all, so the Influence value shown in the NLA editor would visibly freeze at whatever it was right before hitting 0, making it look like the slider had stopped working. Weight now reads correctly all the way down to 0% at every step.
+*   **Fixed: Layer Weight silently frozen while a strip is being edited in the NLA editor.** If a strip was left open in NLA Tweak Mode (e.g. from a double-click), Layer Weight would stop affecting anything with no explanation. The Sim Mix Layers panel now shows a clear warning with a one-click "Exit NLA Tweak Mode" button whenever this happens.
+*   **Fixed (Blender 5.2): Total Limit could show a broken, unreadable field instead of a number.** A fallback path meant to paper over a rare Blender 5.1 registry timing quirk rendered incorrectly on 5.2 instead, showing an unusable field rather than the actual value. Property registration is now sequenced so this fallback should essentially never be needed, and the fallback itself now fails safely with a plain message instead of a broken field if it ever is.
+
+---
+
 ## 🆕 What's New in v2.2.8
 
 A correctness- and stability-focused release for Sim Mix Layers and Bake Result C, plus a UI reorganization aimed at making the panel layout easier to navigate.
@@ -83,7 +94,7 @@ Together, they form a "Zero-Waste" ecosystem—from initial strand creation to t
 
 ---
 
-## 📖 User Guide: Wiggle 2 Physics v2.2.8
+## 📖 User Guide: Wiggle 2 Physics v2.2.9
 
 ### Step 1: Initializing your Physics Stack
 To begin using Wiggle 2 RTX, you must first define your animation and simulation layers. The system will not calculate physics until these layers are initialized.
@@ -120,6 +131,7 @@ To begin using Wiggle 2 RTX, you must first define your animation and simulation
 *   Toggle: Switches between per-bone individual limits and global settings.
 *   Total Limit: Sets the maximum allowed rotation. Higher values allow larger motion; lower values (e.g., 30-60°) prevent mesh clipping.
 *   **v2.2.6 fix**: Total Limit now holds correctly at every **Quality** level. Previously, raising Quality could let the bone swing far past the number you set (e.g. 10° behaving like 90°) — that's fixed, so you can safely raise Quality for smoother motion without your limit breaking.
+*   **v2.2.9 fix (Blender 5.2)**: Total Limit could show a broken, unreadable field instead of a number right after enabling the addon. That's fixed — if you still ever see this, use Blender's "Reload Scripts" once.
 *   **Individual Limits (X / Z)**: Instead of one cone-shaped Total Limit, this lets you set separate up-down (X) and left-right (Z) ranges — useful for things like eyelids or fins that should only move in one plane.
 
 <video width="100%" controls>
@@ -133,6 +145,7 @@ This core feature handles keyframes (animation) and simulation (physics) as a si
 
 ![Sim Mix Layers UI](assets/image.png)
 
+*   **Layer Weight (%)**: Cross-fades this layer against everything below it (0% = fully hidden, 100% = fully replaces what's below). **v2.2.9 fix**: dragging this to 0% used to make the Influence value shown in the NLA editor visibly freeze instead of reaching 0 — it now updates correctly at every step down to 0%. **v2.2.9 fix**: if a strip is left open for editing in NLA Tweak Mode (e.g. from double-clicking it in the NLA editor), this panel now shows a clear warning with a one-click button to exit Tweak Mode and restore Layer Weight — previously it would just silently stop doing anything with no explanation.
 *   **Bake Result C (Composite Bake)**: Merges keyframes and simulation into a single keyframe track while preserving the exact layer mix weights. **As of v2.2.8, the Bake Result C button and all its settings (Preroll/Overwrite/NLA) live under Global Utilities → Bake, below Loop Physics** — not in this panel. This is still the **only** bake control in the addon; see Step 7 below for the full bake workflow.
 *   **v2.2.8 fix**: Bake Result C now captures **every bone in the armature**, not just wiggle-enabled ones. Previously a "combined" bake silently skipped anything Base alone was driving (torso, limbs, etc.), so the result wasn't actually self-contained — it only looked that way until you removed Base.
 *   **Non-default behavior**: By default, baking creates a **new Sim layer** (named "Bake", "Bake 2", ...) with its own new action, added to the Sim Mix Layers list and auto-selected — non-destructive to your existing layers, so you can bake the same range multiple times to compare variations without losing earlier results. Turning on **Overwrite Current Action** (Step 7) changes this: with a Sim layer selected in this list, baking writes directly into that layer's own action instead of creating a new one.
