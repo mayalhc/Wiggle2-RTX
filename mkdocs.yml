@@ -1,6 +1,6 @@
 # 사이트 설정
 site_name: Wiggle 2 RTX
-site_url: https://github.com/mayalhc/blender-wiggle-2
+site_url: https://mayalhc.github.io/Wiggle2-RTX/
 site_author: chamiseul
 
 # 시놀로지 볼륨 매핑 경로와 일치
@@ -26,7 +26,8 @@ markdown_extensions:
 # 네비게이션
 nav:
   - Wiggle 2 RTX Guide: index.md
-  - "Go to GroomForge Wiki": integration.md
+  - News: news/index.md
+  - Pipeline: integration.md
 
 # 플러그인 설정
 plugins:
