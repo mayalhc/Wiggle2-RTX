@@ -27,8 +27,7 @@ markdown_extensions:
 nav:
   - Wiggle 2 RTX Guide: index.md
   - News: news/index.md
-  - Pipeline: integration.md
-
+  - "All add-ons & guides": https://mayalhc.github.io/GroomForge-Wiki/
 # 플러그인 설정
 plugins:
   - search
