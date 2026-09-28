@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="None" /><meta name="author" content="chamiseul" /><link rel="canonical" href="https://mayalhc.github.io/Wiggle2-RTX/" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>Wiggle 2 RTX</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Wiggle 2 RTX Guide";
+        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_url = "/Wiggle2-RTX/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="." class="icon icon-home"> Wiggle 2 RTX
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Wiggle 2 RTX Guide</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#whats-new-in-v240">🆕 What's New in v2.4.0</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#why-rtx-edition">✨ Why RTX Edition?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#key-synergy-the-masters-workflow">🚀 Key Synergy: The Master's Workflow</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#user-guide-wiggle-2-physics-v240">📖 User Guide: Wiggle 2 Physics v2.4.0</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#step-1-initializing-your-physics-stack">Step 1: Initializing your Physics Stack</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#critical-prerequisite-push-down-action">Critical Prerequisite: Push Down Action</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#layer-setup">Layer Setup</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-2-stability-and-safety-guards">🛠️ Step 2: Stability and Safety Guards</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-use-individual-limits">1) Use Individual Limits</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-3-sim-mix-layers-unified-workflow">🚀 Step 3: Sim Mix Layers Unified Workflow</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-4-wiggle-safety-guard-adaptive-safety-self-collision-lattice">🛡️ Step 4: Wiggle Safety Guard (Adaptive Safety, Self Collision &amp; Lattice)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-adaptive-safety">1) Adaptive Safety</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-self-collision-new">2) Self Collision (New)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-horizontal-lattice-stabilizer">3) Horizontal Lattice Stabilizer</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-5-tail-head-settings-rtx-optimization-core">⚙️ Step 5: Tail &amp; Head Settings (RTX Optimization Core)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-6-global-utilities">⚡ Step 6: Global Utilities</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#quick-presets-one-click-presets">Quick Presets (One-click Presets)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#collision-guide-options">Collision Guide Options</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-7-loop-physics-and-final-bake">🔄 Step 7: Loop Physics and Final Bake</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#disk-point-cache-new">Disk Point Cache (New)</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="news/">News</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="news/#out-now">Out now</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="news/#every-guide-now-lives-in-one-place">Every guide now lives in one place</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="news/#studio-ci-all-guides">📖 Studio Ci — all guides</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="news/#hair-cards-rebuilt">Hair cards, rebuilt</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="news/#bones-stay-where-the-collision-put-them">Bones stay where the collision put them</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="news/#hair-tails-and-skirts-move-on-their-own">Hair, tails and skirts move on their own</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="news/#metahuman-outfits-prepared-for-fab-without-the-repetition">MetaHuman outfits prepared for Fab, without the repetition</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="news/#team-fortress-2-characters-go-to-cascadeur-in-one-piece">Team Fortress 2 characters go to Cascadeur in one piece</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="news/#four-legged-characters-rig-themselves-in-cascadeur">Four-legged characters rig themselves in Cascadeur</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="news/#any-rig-can-make-the-trip-not-just-metahuman">Any rig can make the trip, not just MetaHuman</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="news/#bring-a-take-back-at-whatever-speed-you-want">Bring a take back at whatever speed you want</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="news/#a-character-moves-in-unreal-while-the-motion-is-still-being-made">A character moves in Unreal while the motion is still being made</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="news/#cascadeur-animation-comes-back-into-blender">Cascadeur animation comes back into Blender</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="news/#received-animation-lands-on-your-rigify-controls">Received animation lands on your Rigify controls</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="news/#the-face-plays-live-in-unreal-with-nothing-exported">The face plays live in Unreal, with nothing exported</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="news/#garments-come-back-from-marvelous-designer-in-two-clicks">Garments come back from Marvelous Designer in two clicks</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="news/#the-plug-ins-come-in-the-box">The plug-ins come in the box</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://mayalhc.github.io/GroomForge-Wiki/">All add-ons & guides</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">Wiggle 2 RTX</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Wiggle 2 RTX Guide</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="welcome-to-the-wiggle-2-rtx-edition-wiki">Welcome to the Wiggle 2: RTX Edition Wiki</h1>
+<ul>
+<li>"The Most Versatile Physics Solution for Rigs of All Kinds.</li>
+<li>"While optimized for high-density hair, Wiggle 2: RTX Edition is a universal physics engine designed for any bone-based setup. </li>
+<li>From complex character tails and dynamic clothing to subtle accessory vibrations, it brings lifelike, procedural movement to every part of your rig.</li>
+</ul>
+<video width="100%" controls>
+  <source src="assets/blender_ppr2ap3Es5.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<ul>
+<li>Wiggle 2: RTX Edition is a professional physics solution engineered to bring dynamic, </li>
+<li>lifelike movement to massive hair setups. Optimized for high-end character production, </li>
+<li>it serves as a critical pillar in the modern grooming pipeline, especially when paired with GroomForge PRO.</li>
+</ul>
+<hr />
+<h2 id="whats-new-in-v240">🆕 What's New in v2.4.0</h2>
+<p>This update merges the September development branch into the main addon (Auto Cache, Auto Clean Reset, Field Collections, Smart Bake, modal bakes with progress/Esc cancel, auto-key protection, Copy performance, and NLA influence keyframe hygiene), and fixes two issues found during full runtime verification:</p>
+<ul>
+<li><strong>Fixed (critical): playback could crash Blender 4.x / 5.0.x.</strong> The auto clean reset re-evaluated the dependency graph from inside the frame-change handler, which could segfault Blender during playback start or rewinds on older versions. The rest pose is now derived directly, without re-entering the depsgraph.</li>
+<li><strong>Fixed: Adaptive Safety Guard did not react to fast motion.</strong> Its per-object trackers are now stored as module-level state (the previous scene-property storage silently reset every frame), so movement/rotation detection works again.</li>
+<li><strong>Disk cache now stores the complete bone state</strong> (collision/sticky info and the adaptive damping modifier), so cached frames restore everything the live simulation had. Older cache files are still accepted.</li>
+<li><strong>Bake to Disk Cache leaves "Use Cache During Playback" enabled</strong> after a successful bake, so scrubbing uses the cache immediately.</li>
+</ul>
+<p><strong>Reference — Gunvaldis Urtāns:</strong> The September update this release builds on was provided by Gunvaldis Urtāns (September 23 messages): the revised build with the <strong>Auto Reset on Rewind</strong> option, plus the fix so <strong>Layer Weight no longer keyframes itself while Auto Key is on</strong>. Both are fully incorporated in this release. Thank you!</p>
+<hr />
+<h2 id="why-rtx-edition">✨ Why RTX Edition?</h2>
+<p>Experience next-level features that go far beyond the standard Wiggle 2. The RTX Edition is built for professional stability and complex multi-layered setups.</p>
+<ul>
+<li><strong>Universal Bone Physics</strong>: Not just for hair. Optimized for <strong>Tails, Clothing, Capes, and any bone-based rig</strong> requiring organic secondary motion.</li>
+<li><strong>Modern API Support</strong>: Fully compatible with Blender 4.2 LTS, 5.0, and 5.1+ environments.</li>
+<li><strong>Layered Physics System</strong>: A revolutionary system allowing independent physics control for different rig sections (layers) within a single armature.</li>
+<li><strong>Advanced Keyframe &amp; Sim Baking</strong>: High-fidelity conversion of simulation data into animation keyframes, ensuring 100% match between Blender and Game Engines.</li>
+<li><strong>High-Density Optimization</strong>: Delivers smooth, lag-free viewport performance even with complex rigs involving tens of thousands of bones.</li>
+</ul>
+<hr />
+<h2 id="key-synergy-the-masters-workflow">🚀 Key Synergy: The Master's Workflow</h2>
+<p>The ultimate character production pipeline is achieved through the seamless integration of these two powerful tools:</p>
+<ul>
+<li><a href="https://github.io"><strong>GroomForge PRO</strong></a>: The industry's most advanced tool for precision creation, UV packing, and Groom Exporting for Unreal Engine 5.</li>
+<li><strong>Wiggle 2 RTX</strong>: Adds the final layer of life. It applies high-speed layered physics to GroomForge-generated rigs and provides seamless baking, optimized specifically for <strong>UE5 MetaHuman</strong> pipelines.</li>
+</ul>
+<p>Together, they form a "Zero-Waste" ecosystem—from initial strand creation to the final physics-baked export.</p>
+<hr />
+<h2 id="user-guide-wiggle-2-physics-v240">📖 User Guide: Wiggle 2 Physics v2.4.0</h2>
+<h3 id="step-1-initializing-your-physics-stack">Step 1: Initializing your Physics Stack</h3>
+<p>To begin using Wiggle 2 RTX, you must first define your animation and simulation layers. The system will not calculate physics until these layers are initialized.</p>
+<video width="100%" controls>
+  <source src="assets/blender_mV2e3Pqf7z.mp4" type="video/mp4">
+</video>
+<hr />
+<h4 id="critical-prerequisite-push-down-action">Critical Prerequisite: Push Down Action</h4>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Before adding layers, your base animation must be pushed down into the NLA (Non-Linear Animation) stack.
+   Requirement: The system identifies the "Base_Anim" layer by looking at the pushed-down action strips in the NLA Editor.
+   How-to: Select your armature &gt; Go to the NLA Editor &gt; Click the 'Push Down' button on your active action.</p>
+</div>
+<p><img alt="NLA Push Down Guide" src="assets/image%201.png" /></p>
+<h4 id="layer-setup">Layer Setup</h4>
+<ul>
+<li>Add Base Layer: Click the + button to add your Base_Anim layer.</li>
+<li>Add Sim Layer: Add one or more Sim_Layers where the RTX physics engine lives.</li>
+</ul>
+<video width="100%" controls>
+  <source src="assets/blender_yPncVZCJMz.mp4" type="video/mp4">
+</video>
+
+<hr />
+<h2 id="step-2-stability-and-safety-guards">🛠️ Step 2: Stability and Safety Guards</h2>
+<h3 id="1-use-individual-limits">1) Use Individual Limits</h3>
+<p><img alt="Use Individual Limits" src="assets/limit.png" /></p>
+<ul>
+<li>Toggle: Switches between per-bone individual limits and global settings.</li>
+<li>Total Limit: Sets the maximum allowed rotation. Higher values allow larger motion; lower values (e.g., 30-60°) prevent mesh clipping.</li>
+<li><strong>v2.2.6 fix</strong>: Total Limit now holds correctly at every <strong>Quality</strong> level. Previously, raising Quality could let the bone swing far past the number you set (e.g. 10° behaving like 90°) — that's fixed, so you can safely raise Quality for smoother motion without your limit breaking.</li>
+<li><strong>v2.2.9 fix (Blender 5.2)</strong>: Total Limit could show a broken, unreadable field instead of a number right after enabling the addon. That's fixed — if you still ever see this, use Blender's "Reload Scripts" once.</li>
+<li><strong>Individual Limits (X / Z)</strong>: Instead of one cone-shaped Total Limit, this lets you set separate up-down (X) and left-right (Z) ranges — useful for things like eyelids or fins that should only move in one plane.</li>
+</ul>
+<video width="100%" controls>
+  <source src="assets/blender_oJBmdVyU4K.mp4" type="video/mp4">
+</video>
+
+<hr />
+<h2 id="step-3-sim-mix-layers-unified-workflow">🚀 Step 3: Sim Mix Layers Unified Workflow</h2>
+<p>This core feature handles keyframes (animation) and simulation (physics) as a single unified data flow.</p>
+<p><img alt="Sim Mix Layers UI" src="assets/image.png" /></p>
+<ul>
+<li><strong>Layer Weight (%)</strong>: Cross-fades this layer against everything below it (0% = fully hidden, 100% = fully replaces what's below). <strong>v2.2.9 fix</strong>: dragging this to 0% used to make the Influence value shown in the NLA editor visibly freeze instead of reaching 0 — it now updates correctly at every step down to 0%. <strong>v2.2.9 fix</strong>: if a strip is left open for editing in NLA Tweak Mode (e.g. from double-clicking it in the NLA editor), this panel now shows a clear warning with a one-click button to exit Tweak Mode and restore Layer Weight — previously it would just silently stop doing anything with no explanation.</li>
+<li><strong>Bake Result C (Composite Bake)</strong>: Merges keyframes and simulation into a single keyframe track while preserving the exact layer mix weights. <strong>As of v2.2.8, the Bake Result C button and all its settings (Preroll/Overwrite/NLA) live under Global Utilities → Bake, below Loop Physics</strong> — not in this panel. This is still the <strong>only</strong> bake control in the addon; see Step 7 below for the full bake workflow.</li>
+<li><strong>v2.2.8 fix</strong>: Bake Result C now captures <strong>every bone in the armature</strong>, not just wiggle-enabled ones. Previously a "combined" bake silently skipped anything Base alone was driving (torso, limbs, etc.), so the result wasn't actually self-contained — it only looked that way until you removed Base.</li>
+<li><strong>Non-default behavior</strong>: By default, baking creates a <strong>new Sim layer</strong> (named "Bake", "Bake 2", ...) with its own new action, added to the Sim Mix Layers list and auto-selected — non-destructive to your existing layers, so you can bake the same range multiple times to compare variations without losing earlier results. Turning on <strong>Overwrite Current Action</strong> (Step 7) changes this: with a Sim layer selected in this list, baking writes directly into that layer's own action instead of creating a new one.</li>
+<li><strong>Fixed (v2.2.7)</strong>: the baked result now always reads the true combined Base+Sim pose at every frame before writing any keyframes, so it always matches exactly what you see in the viewport before baking.</li>
+<li><strong>Non-destructive workflow</strong>: Keeps <code>Base_Anim</code> (and every existing Sim layer) untouched while cleanly extracting only the simulated result into its own layer (unless Overwrite is on — see above).</li>
+<li><strong>Game-engine friendly</strong>: Flattens the animation so Unity/Unreal playback matches the Blender viewport 100%.</li>
+</ul>
+<video width="100%" controls>
+  <source src="assets/blender_K4ijchgKlX.mp4" type="video/mp4">
+</video>
+
+<hr />
+<h2 id="step-4-wiggle-safety-guard-adaptive-safety-self-collision-lattice">🛡️ Step 4: Wiggle Safety Guard (Adaptive Safety, Self Collision &amp; Lattice)</h2>
+<p><img alt="Safety Guard UI" src="assets/image%202.png" /></p>
+<p>This panel is a "safety net" that prevents uncontrolled behavior such as explosions or infinite jitter during simulation. It now bundles three separate tools:</p>
+<h3 id="1-adaptive-safety">1) Adaptive Safety</h3>
+<ol>
+<li><strong>Adaptive Safety</strong>: Detects abnormal velocity / excessive energy buildup and applies real-time damping to stabilize.</li>
+<li><strong>Sensitivity (e.g., 5.00)</strong>: Higher values react more aggressively to small vibrations.</li>
+<li><strong>Rotation Threshold (deg/s)</strong>: New in this update. Works alongside Sensitivity, but watches for <em>spinning</em> speed instead of position. If a bone starts spinning faster than this value (degrees per second), the guard damps it down before it explodes. Lower the value if you still see fast "whipping" motion after enabling Adaptive Safety.</li>
+<li><strong>Note</strong>: This feature is currently closer to an experimental stage. If motion becomes too stiff, turn it off or lower Sensitivity.</li>
+</ol>
+<h3 id="2-self-collision-new">2) Self Collision (New)</h3>
+<ul>
+<li><strong>Self Collision (this object)</strong>: Turn this on per-armature to let a rig's own wiggle bones push each other apart instead of passing through themselves. Great for thick tails, bundled hair strands, or overlapping skirt panels. Off by default because it costs extra performance — only enable it where you actually see clipping.</li>
+<li><strong>Margin</strong>: Extra buffer distance added on top of each bone's own Radius setting (found in Tail Settings) before bones are pushed apart. Raise this slightly if bones still visibly touch.</li>
+</ul>
+<h3 id="3-horizontal-lattice-stabilizer">3) Horizontal Lattice Stabilizer</h3>
+<ul>
+<li><strong>Horizontal Lattice Stabilizer</strong>: Enable this to link same-depth bones across neighboring chains (for example, the 3rd bone of every strand in a skirt or hair bunch). This keeps a group of dangling chains moving together as a coherent shape instead of flailing independently.</li>
+<li><strong>Lattice Stiffness</strong>: How strongly linked bones pull back toward each other. Higher = tighter, more uniform grouping.</li>
+<li><strong>Stretch Tolerance</strong>: How much the lattice link can stretch before it starts correcting. Raise this if you see popping/snapping between linked bones; lower it for a tighter group.</li>
+<li><strong>Show Lattice Guide</strong>: Draws the connecting lines in the viewport so you can see which bones are linked.</li>
+<li><strong>Active Bone is Lattice Collider</strong>: Mark the currently selected bone as a solid obstacle that other lattice-linked bones should avoid, with an adjustable Radius.</li>
+<li><strong>Tip</strong>: This stabilizer runs in real time in the viewport (independent of the frame-by-frame simulation clock), so it reacts immediately as you scrub or drag — it's meant purely as a visual/interactive stabilizer for grouped strands, not as part of the baked physics result.</li>
+</ul>
+<hr />
+<h2 id="step-5-tail-head-settings-rtx-optimization-core">⚙️ Step 5: Tail &amp; Head Settings (RTX Optimization Core)</h2>
+<p><img alt="Tail Settings UI" src="assets/image%203.png" /></p>
+<p>The most frequently used core settings area, with many stability improvements in v2.2.6.</p>
+<ol>
+<li><strong>Physics parameters</strong>: Mass, Stiff, Stretch, Damp, and Gravity, same as before — improved recovery behavior so stretched bones snap back more predictably.</li>
+<li><strong>Freeze this bone side (Mute)</strong>: New Mute icon next to "Tail Settings" and "Head Settings" in the panel header. Toggling it pauses physics for just that side of the bone (it snaps back to follow the animated rest pose) without disabling the whole bone or object — handy for troubleshooting a single misbehaving bone without losing your other settings.</li>
+<li><strong>Stiff / Damp Root-Tip Distribution</strong>: Click the small curve icon next to Stiff or Damp to reveal <strong>Root</strong> and <strong>Tip</strong> sliders. This tapers the value along the whole chain below the selected bone (e.g. stiffer near the root, looser at the tip) instead of one flat value for every bone. Dragging Root/Tip now updates the whole chain live as you type.</li>
+<li><strong>Wind</strong>: Assign any Blender Force Field object to the Wind slot. As of v2.2.6 this also works correctly on <strong>Head Settings</strong> (previously head-side wind was silently ignored). Three field types are supported:</li>
+<li><strong>Wind</strong>: A steady directional push.</li>
+<li><strong>Turbulence</strong>: Chaotic, randomized motion — good for flags, leaves, loose hair.</li>
+<li><strong>Vortex</strong>: Swirling motion around the field object — good for magical/energy effects or hair caught in a draft.</li>
+<li><strong>Collisions</strong>: Choose a collision source next to "Collisions":</li>
+<li><strong>Object</strong>: Collide against a real mesh object.</li>
+<li><strong>Collection</strong>: Collide against every mesh in a Collection at once.</li>
+<li><strong>Sphere / Box / Cylinder / Capsule</strong> (New): Collide against a simple procedural shape instead of a mesh. Just pick any object (an Empty works great) and its own scale defines the size of the shape — no need to model actual collision geometry. Capsule is recommended for limbs, tails, and fingers.</li>
+<li><strong>Radius / Friction / Bounce / Sticky</strong>: Fine-tune how the bone reacts on contact. <strong>Bounce</strong> now actually reflects the bone off the surface (previously it had no effect) — 0 means it just stops on contact, higher values make it spring off.</li>
+<li><strong>Chain</strong>: Reduces "tip energy buildup" so the far end of long chains doesn't build up excess energy and explode outward.</li>
+</ol>
+<hr />
+<h2 id="step-6-global-utilities">⚡ Step 6: Global Utilities</h2>
+<h3 id="quick-presets-one-click-presets">Quick Presets (One-click Presets)</h3>
+<p>Applies optimized baseline values for common scenarios: <strong>Jelly / Hair / Heavy / Cloth / Spring / Antenna</strong>.
+*   <strong>Tip</strong>: Apply a preset first, then fine-tune in Tail Settings.</p>
+<video width="100%" controls>
+  <source src="assets/blender_8HdT3mHN1b.mp4" type="video/mp4">
+</video>
+
+<h3 id="collision-guide-options">Collision Guide Options</h3>
+<ul>
+<li><strong>Collision Shape</strong>: Box / Cylinder / Capsule (recommended).</li>
+<li><strong>Visual Guide</strong>: View collision volume as a viewport wireframe guide.</li>
+<li><strong>Interaction</strong>: Adjust Radius / Friction / Bounce / Sticky.</li>
+<li><strong>Collisions</strong>: Set targets by Object or Collection.</li>
+</ul>
+<video width="100%" controls>
+  <source src="assets/blender_zAh4yUSDHu.mp4" type="video/mp4">
+</video>
+
+<hr />
+<h2 id="step-7-loop-physics-and-final-bake">🔄 Step 7: Loop Physics and Final Bake</h2>
+<p><img alt="Bake System UI" src="assets/image%207.png" /></p>
+<blockquote>
+<p><strong>Location (v2.2.8)</strong>: this entire step now lives under <strong>Global Utilities → Bake</strong>, with Loop Physics at the top of that same panel and everything else below it — not in the Sim Mix Layers panel. There is still only one bake control in the whole addon: <strong>Bake Result C</strong>.</p>
+</blockquote>
+<ul>
+<li><strong>Loop Physics</strong>: Smoothly connects physics state from last frame back to the first, so a looping animation doesn't "snap" or reset at the seam. Turn it on before baking a looping cycle (walk cycles, idle animations, etc.).</li>
+<li><strong>Preroll</strong>: Number of extra stabilization frames simulated <em>before</em> your bake range starts (typically 10~30 frames), so the physics has already "settled" by the time your actual animation begins instead of starting from a stiff, frozen pose.</li>
+<li><strong>Overwrite Current Action</strong>: When off (default), each bake creates a <strong>new Sim layer + action</strong> in Sim Mix Layers, leaving everything else untouched. When on, baking writes directly into whichever <strong>Sim layer is currently selected</strong> in the Sim Mix Layers list, overwriting that layer's own action instead of creating a new one — select the layer you want to update first.</li>
+<li><strong>Current Action to NLA</strong>: When on, your existing action is pushed down to an NLA track before baking, keeping it safely archived instead of being overwritten.</li>
+<li><strong>Bake Result C</strong>: The button that actually runs the bake, using the three settings above. Always bakes the entire armature (every bone, not just wiggle-enabled ones) so the result is a complete, self-contained action — see Step 3 for details on what gets combined.</li>
+</ul>
+<h3 id="disk-point-cache-new">Disk Point Cache (New)</h3>
+<p>For long or heavy simulations, scrubbing the timeline normally forces Wiggle 2 to re-simulate every frame from the start each time you jump backward — which gets slow on long ranges. The new <strong>Disk Point Cache</strong> box lets you:
+*   <strong>Bake to Disk Cache</strong>: Simulates your full frame range once and saves every frame's physics result to disk.
+*   <strong>Use Cache During Playback</strong>: While enabled, scrubbing/playback loads the saved result instantly instead of re-simulating.
+*   <strong>Clear Cache</strong>: Deletes the saved cache — do this after changing any physics settings, since the cache does not auto-detect setting changes.
+*   <strong>Directory</strong>: Where cache files are stored (defaults to a folder next to your <code>.blend</code> file).</p>
+<hr />
+<p><strong>💡 Final Optimization Tip (The "Zero Waste" Rule)</strong>
+Use a <strong>256px</strong> guide image in <strong>GroomForge PRO</strong> for optimized UV layouts to ensure <strong>Wiggle 2 RTX</strong> physics run faster and more stable.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="news/" class="btn btn-neutral float-right" title="News">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+      <span><a href="news/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = ".";</script>
+    <script src="js/theme_extra.js"></script>
+    <script src="js/theme.js"></script>
+      <script src="search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.6.1
+Build Date UTC : 2026-09-28 18:42:37.818121+00:00
+-->
